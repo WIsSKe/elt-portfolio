@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ELT Portfolio — Basics of English Methodology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf8;
+      --surface: #ffffff;
+      --border: #e8e6df;
+      --text: #1a1916;
+      --muted: #6b6960;
+      --accent: #2c5f3f;
+      --accent-light: #e8f2ec;
+      --tag-bg: #f0ede6;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+    }
+    .hero-meta {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .hero-meta-item span:first-child {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+    .hero-meta-item span:last-child {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* MAIN */
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      padding: 4rem 0 2rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .section-header h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.7rem;
+      letter-spacing: -0.01em;
+    }
+    .section-count {
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: var(--tag-bg);
+      padding: 3px 10px;
+      border-radius: 2px;
+    }
+    .section-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: -1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* JOURNAL ENTRY */
+    .entry {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+    }
+    .entry-header {
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      user-select: none;
+    }
+    .entry-header:hover { background: var(--bg); }
+    .entry-num {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+    .entry-title-group { flex: 1; }
+    .entry-title {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .entry-prompt {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 4px;
+      font-style: italic;
+    }
+    .entry-toggle {
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+      margin-top: 2px;
+      transition: transform 0.2s;
+    }
+    .entry.open .entry-toggle { transform: rotate(180deg); }
+    .entry-body {
+      display: none;
+      padding: 0 1.5rem 1.5rem;
+    }
+    .entry.open .entry-body { display: block; }
+    .entry-body-inner {
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+    }
+    .entry-word-count {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .wc-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      display: inline-block;
+    }
+    .wc-dot.done { background: var(--accent); }
+    .entry-text {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.8;
+    }
+    .entry-text p + p { margin-top: 0.75rem; }
+    .entry-placeholder {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-style: italic;
+      padding: 1rem 0;
+      border-left: 2px solid var(--border);
+      padding-left: 1rem;
+    }
+
+    /* DOSSIER */
+    .dossier-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 560px) {
+      .dossier-grid { grid-template-columns: 1fr; }
+    }
+    .dossier-card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+      padding: 1.25rem 1.5rem;
+    }
+    .dossier-card.filled { border-color: var(--accent); }
+    .dossier-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+    .dossier-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+    }
+    .dossier-status {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 2px;
+    }
+    .status-todo { background: var(--tag-bg); color: var(--muted); }
+    .status-done { background: var(--accent-light); color: var(--accent); }
+    .dossier-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+    .dossier-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .dossier-reflection {
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+      display: none;
+    }
+    .dossier-card.filled .dossier-reflection { display: block; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">ELT Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="#journal">Journal</a></li>
+      <li><a href="#dossier">Dossier</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="hero-tag">Basics of English Methodology</span>
+  <h1>Teaching &amp; Learning<br /><em>Reflective Portfolio</em></h1>
+  <p>A collection of journal entries and practical tasks exploring the principles of English language teaching across age groups and contexts.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span>Student</span>
+      <span>Your Name</span>
+    </div>
+    <div class="hero-meta-item">
+      <span>Course</span>
+      <span>Basics of English Methodology</span>
+    </div>
+    <div class="hero-meta-item">
+      <span>Year</span>
+      <span>2025/2026</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- JOURNAL -->
+  <section id="journal">
+    <div class="section-header">
+      <h2>Journal</h2>
+      <span class="section-count">6 entries</span>
+    </div>
+    <p class="section-desc">Reflective entries on course topics — minimum 100 words each.</p>
+
+    <!-- Entry 1 -->
+    <div class="entry" id="e1">
+      <div class="entry-header" onclick="toggle('e1')">
+        <span class="entry-num">Entry 01</span>
+        <div class="entry-title-group">
+          <div class="entry-title">Very Young Learners &amp; the VYL Teacher</div>
+          <div class="entry-prompt">How do very young children learn a FL? What makes a good VYL teacher? Would you like to teach VYLs?</div>
+        </div>
+        <span class="entry-toggle">▾</span>
+      </div>
+      <div class="entry-body">
+        <div class="entry-body-inner">
+          <div class="entry-word-count">
+            <span class="wc-dot"></span>
+            <span>Not yet written · min. 100 words</span>
+          </div>
+          <div class="entry-placeholder">
+            Your reflection goes here. Write about how VYLs acquire language through play, songs, repetition, and routine. Consider what qualities a good VYL teacher needs — patience, energy, creativity, warmth. Would you enjoy teaching this age group? Why or why not?
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Entry 2 -->
+    <div class="entry" id="e2">
+      <div class="entry-header" onclick="toggle('e2')">
+        <span class="entry-num">Entry 02</span>
+        <div class="entry-title-group">
+          <div class="entry-title">Principles of Teaching Young Learners</div>
+          <div class="entry-prompt">What are some principles of teaching YLs? Would you enjoy teaching this age group?</div>
+        </div>
+        <span class="entry-toggle">▾</span>
+      </div>
+      <div class="entry-body">
+        <div class="entry-body-inner">
+          <div class="entry-word-count">
+            <span class="wc-dot"></span>
+            <span>Not yet written · min. 100 words</span>
+          </div>
+          <div class="entry-placeholder">
+            Your reflection goes here. Think about key principles: learner-centred approach, use of visuals, games, movement, short activities, predictable routines. How do YLs differ from adults in motivation and learning style?
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Entry 3 -->
+    <div class="entry" id="e3">
+      <div class="entry-header" onclick="toggle('e3')">
+        <span class="entry-num">Entry 03</span>
+        <div class="entry-title-group">
+          <div class="entry-title">Teaching English to Teenagers</div>
+          <div class="entry-prompt">What would be some positives and challenges of teaching teenagers?</div>
+        </div>
+        <span class="entry-toggle">▾</span>
+      </div>
+      <div class="entry-body">
+        <div class="entry-body-inner">
+          <div class="entry-word-count">
+            <span class="wc-dot"></span>
+            <span>Not yet written · min. 100 words</span>
+          </div>
+          <div class="entry-placeholder">
+            Your reflection goes here. Consider challenges: motivation, peer pressure, identity, resistance to authority. Positives: ability to discuss complex topics, metalinguistic awareness, capacity for abstract thought.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Entry 4 -->
+    <div class="entry" id="e4">
+      <div class="entry-header" onclick="toggle('e4')">
+        <span class="entry-num">Entry 04</span>
+        <div class="entry-title-group">
+          <div class="entry-title">Adults Learning English as a Foreign Language</div>
+          <div class="entry-prompt">How do adults learn English compared to other age groups? Main differences?</div>
+        </div>
+        <span class="entry-toggle">▾</span>
+      </div>
+      <div class="entry-body">
+        <div class="entry-body-inner">
+          <div class="entry-word-count">
+            <span class="wc-dot"></span>
+            <span>Not yet written · min. 100 words</span>
+          </div>
+          <div class="entry-placeholder">
+            Your reflection goes here. Think about andragogy vs pedagogy, intrinsic motivation, life experience as a resource, affective filter, fossilisation, less inhibition about making mistakes vs more — depending on context.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Entry 5 -->
+    <div class="entry" id="e5">
+      <div class="entry-header" onclick="toggle('e5')">
+        <span class="entry-num">Entry 05</span>
+        <div class="entry-title-group">
+          <div class="entry-title">One-to-One vs Group Teaching</div>
+          <div class="entry-prompt">Compare and contrast teaching one-to-one and teaching groups.</div>
+        </div>
+        <span class="entry-toggle">▾</span>
+      </div>
+      <div class="entry-body">
+        <div class="entry-body-inner">
+          <div class="entry-word-count">
+            <span class="wc-dot"></span>
+            <span>Not yet written · min. 100 words</span>
+          </div>
+          <div class="entry-placeholder">
+            Your reflection goes here. Compare: personalisation vs peer learning, pacing, dynamics, teacher role, interaction patterns, advantages and disadvantages of each setting.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Entry 6 -->
+    <div class="entry" id="e6">
+      <div class="entry-header" onclick="toggle('e6')">
+        <span class="entry-num">Entry 06</span>
+        <div class="entry-title-group">
+          <div class="entry-title">Course Reflection</div>
+          <div class="entry-prompt">What did you think of the course content and form? What did you enjoy? What would you change?</div>
+        </div>
+        <span class="entry-toggle">▾</span>
+      </div>
+      <div class="entry-body">
+        <div class="entry-body-inner">
+          <div class="entry-word-count">
+            <span class="wc-dot"></span>
+            <span>Not yet written · min. 100 words</span>
+          </div>
+          <div class="entry-placeholder">
+            Your reflection goes here. Look back at the whole course — topics you found most interesting, how the sessions were structured, what you would like to have explored more deeply.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOSSIER -->
+  <section id="dossier">
+    <div class="section-header">
+      <h2>Dossier</h2>
+      <span class="section-count">4 tasks</span>
+    </div>
+    <p class="section-desc">Four practical tasks of your choice, each filed with a reflection.</p>
+
+    <div class="dossier-grid">
+
+      <div class="dossier-card">
+        <div class="dossier-top">
+          <span class="dossier-label">Task 1</span>
+          <span class="dossier-status status-todo">To do</span>
+        </div>
+        <div class="dossier-title">Choose a task type</div>
+        <div class="dossier-desc">Options: micro-teaching, observation, self-observation, peer-observation, dept. teacher observation, faculty-school observation, critical reading/viewing, or your own choice.</div>
+      </div>
+
+      <div class="dossier-card">
+        <div class="dossier-top">
+          <span class="dossier-label">Task 2</span>
+          <span class="dossier-status status-todo">To do</span>
+        </div>
+        <div class="dossier-title">Choose a task type</div>
+        <div class="dossier-desc">Options: micro-teaching, observation, self-observation, peer-observation, dept. teacher observation, faculty-school observation, critical reading/viewing, or your own choice.</div>
+      </div>
+
+      <div class="dossier-card">
+        <div class="dossier-top">
+          <span class="dossier-label">Task 3</span>
+          <span class="dossier-status status-todo">To do</span>
+        </div>
+        <div class="dossier-title">Choose a task type</div>
+        <div class="dossier-desc">Options: micro-teaching, observation, self-observation, peer-observation, dept. teacher observation, faculty-school observation, critical reading/viewing, or your own choice.</div>
+      </div>
+
+      <div class="dossier-card">
+        <div class="dossier-top">
+          <span class="dossier-label">Task 4</span>
+          <span class="dossier-status status-todo">To do</span>
+        </div>
+        <div class="dossier-title">Choose a task type</div>
+        <div class="dossier-desc">Options: micro-teaching, observation, self-observation, peer-observation, dept. teacher observation, faculty-school observation, critical reading/viewing, or your own choice.</div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    Basics of English Methodology · Reflective Portfolio · 2025/2026
+  </div>
+</footer>
+
+<script>
+  function toggle(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
